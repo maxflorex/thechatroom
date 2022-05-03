@@ -1,23 +1,24 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { HiOutlineCloudUpload } from 'react-icons/hi'
+import { btntw, inputtw } from '../Styles/Styles';
+import { useSignupUserMutation } from '../services/appApi';
 
 const SignUp = () => {
-
-	const btntw = 'mt-2 bg-slate-300 py-4 px-6 rounded-lg hover:bg-slate-900 hover:text-white duration-500 cursor-pointer mr-auto active:scale-110'
-	const inputtw = 'bg-slate-100 p-4 rounded-lg w-96 focus:bg-slate-300 outline-none duration-500 active:scale-110'
 
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [name, setName] = useState('');
+	const [signupUser, { isLoading, error }] = useSignupUserMutation();
 
 	// IMAGE UPLOAD states
 
 	const [image, setImage] = useState(null);
 	const [uploading, setUploading] = useState(false);
 	const [imagePrev, setImagePrev] = useState(null);
+	const navigate= useNavigate();
 
-	// FUNCTION - VALIDATION
+	// FUNCTION - IMAGE VALIDATION
 
 	const ValidateImg = (e) => {
 		const file = e.target.files[0];
@@ -29,24 +30,46 @@ const SignUp = () => {
 		}
 	}
 
-	// FUNCTION - SIGN UP
+	// FUNCTION - SIGNUP
 
-	const handleSignUp = (e) => {
+	const handleSignUp = async (e) => {
 		e.preventDefault();
 		if (!image) return alert('Please add your profile picture');
-		// const url = await uplloaImage(image);
+		const url = await uploadImage(image);
+		console.log(url)
+		signupUser({ name, email, password, picture: url }).then(({ data }) => {
+			if (data) {
+				console.log(data);
+				navigate('/chat')
+			}
+		})
 	}
 
 
 	// FUNCTION - UPLOAD IMAGE
 
 	const uploadImage = async () => {
-		const data = new FormData()
+		const data = new FormData();
+		data.append('file', image);
+		data.append('upload_preset', 'thechatroom');
+		try {
+			setUploading(true);
+			let res = await fetch('https://api.cloudinary.com/v1_1/mx-dev/image/upload', {
+				method: 'post',
+				body: data
+			})
+			const urlData = await res.json();
+			setUploading(false);
+			return urlData.url
+		} catch (error) {
+			setUploading(false);
+			console.log(error)
+		}
 	}
 
 	// CONSOLE
 
-	console.log(name, email, password)
+	// console.log(name, email, password)
 
 	// LINKS
 
@@ -58,9 +81,9 @@ const SignUp = () => {
 			<div className="grid grid-cols-2 h-[80vh]">
 				<div className="flex flex-col p-8 justify-center items-start relative">
 					<h1 className='text-4xl font-bold mb-8'>Sing up</h1>
-					<label for='image-upload' className='relative'>
+					<label htmlFor='image-upload' className='relative'>
 						<img src={imagePrev || img} alt="Headshot" className='w-40 h-40 rounded-full object-cover object-top mb-12 cursor-pointer hover:scale-110 active:scale-90 duration-300' />
-						<HiOutlineCloudUpload  className='absolute bottom-0 right-0 bg-teal-500 p-2 rounded-full text-white text-4xl cursor-pointer mb-4 hover:bg-amber-500'/>
+						<HiOutlineCloudUpload className='absolute bottom-0 right-0 bg-teal-500 p-2 rounded-full text-white text-4xl cursor-pointer mb-4 hover:bg-amber-500' />
 					</label>
 					<input type="file" id='image-upload' hidden accept='image/png, image/jpeg' onChange={ValidateImg} />
 					<form className='flex flex-col gap-4'>

@@ -1,10 +1,30 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { btntw, inputtw } from '../Styles/Styles';
+import { useLoginUserMutation } from '../services/appApi';
+import { AppContext } from '../context/appContext'
 
 const Login = () => {
 
-	const btntw = 'mt-2 bg-slate-300 py-4 px-6 rounded-lg hover:bg-slate-900 hover:text-white duration-500 cursor-pointer mr-auto active:scale-110'
-	const inputtw = 'bg-slate-100 p-4 rounded-lg w-96 focus:bg-slate-300 outline-none duration-500 active:scale-110'
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const [loginUser, { isLoading, error }] = useLoginUserMutation();
+	const navigate = useNavigate();
+	const { socket } = useContext(AppContext)
+
+	// FUNCTION - LOGIN
+	const handleLogin = (e) => {
+		e.preventDefault();
+		// LOGIN LOGIC
+		loginUser({ email, password }).then(({ data }) => {
+				if (data) {
+					// SOCKET WORKS
+					socket.emit('new-user')
+					// NAVIGATE TO THE CHAT
+					navigate('/chat')
+				}
+			})
+	}
 
 	return (
 		<div className="container mx-auto">
@@ -13,11 +33,11 @@ const Login = () => {
 				<div className="flex flex-col p-8 justify-center items-center">
 					<form className='flex flex-col gap-4'>
 						<p className='italic'>Email:</p>
-						<input className={inputtw} type="email" placeholder='Enter Email...' />
+						<input className={inputtw} onChange={(e) => setEmail(e.target.value)} type="email" placeholder='Enter Email...' required />
 						<p className='text-xs text-slate-300'>Your information will never be shared</p>
 						<p className='italic'>Password:</p>
-						<input className={inputtw} type="password" placeholder='Enter Password...' />
-						<span className={btntw}>Login</span>
+						<input className={inputtw} onChange={(e) => setPassword(e.target.value)} type="password" placeholder='Enter Password...' required />
+						<button className={btntw} onClick={handleLogin}>Login</button>
 					</form>
 					<div className="pt-8">
 						<h1>Don't have an account? <Link to='/signup' className='text-amber-500 hover:text-amber-300 duration-300'>Signup</Link></h1>
