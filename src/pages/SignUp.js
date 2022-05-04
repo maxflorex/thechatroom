@@ -16,7 +16,7 @@ const SignUp = () => {
 	const [image, setImage] = useState(null);
 	const [uploading, setUploading] = useState(false);
 	const [imagePrev, setImagePrev] = useState(null);
-	const navigate= useNavigate();
+	const navigate = useNavigate();
 
 	// FUNCTION - IMAGE VALIDATION
 
@@ -87,6 +87,7 @@ const SignUp = () => {
 					</label>
 					<input type="file" id='image-upload' hidden accept='image/png, image/jpeg' onChange={ValidateImg} />
 					<form className='flex flex-col gap-4'>
+						{error && <p>{error.data}</p>}
 						<p className='italic'>Name:</p>
 						<input className={inputtw} onChange={(e) => setName(e.target.value)} type="email" placeholder='Enter Your Name...' />
 						<p className='italic'>Email:</p>
@@ -94,7 +95,7 @@ const SignUp = () => {
 						<p className='text-xs text-slate-300'>Your information will never be shared</p>
 						<p className='italic'>Password:</p>
 						<input className={inputtw} onChange={(e) => setPassword(e.target.value)} type="password" placeholder='Enter Password...' />
-						<span className={btntw} onClick={handleSignUp}>Signup</span>
+						<span className={btntw} onClick={handleSignUp}>{isLoading ? 'Signing you up' : 'Sign up'}</span>
 					</form>
 					<div className="pt-8">
 						<h1>Already have an account? <Link to='/login' className='text-amber-500 hover:text-amber-300 duration-300'>Login</Link></h1>

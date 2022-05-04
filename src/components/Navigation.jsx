@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import { RiChatSmile2Fill } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
 import { linktw } from '../Styles/Styles';
-import { useLoginUserMutation } from '../services/appApi';
+import { useLogoutUserMutation } from '../services/appApi';
 
 const Navigation = () => {
-    const [logoutUser] = useLoginUserMutation();
+    const [logoutUser] = useLogoutUserMutation();
+
     // GET USER STATE FROM REDUX
     const user = useSelector((state) => state.user);
 
@@ -19,20 +20,20 @@ const Navigation = () => {
     };
 
     return (
-        <div className="bg-slate-300 p-8">
-            <div className="container mx-auto flex justify-between">
-                <RiChatSmile2Fill className="text-3xl" />
-                <div className="flex gap-4">
-                    <Link to="/">Home</Link>
+        <div className="bg-slate-300 p-8 h-[6vh]">
+            <div className="container mx-auto flex justify-between items-center">
+                <Link to="/">
+                    <RiChatSmile2Fill className="text-3xl" />
+                </Link>
+                <div className="flex gap-4 items-center">
                     <Link to="/chat">Chat</Link>
                     {!user ? (
                         <>
                             <Link to="/login">Login</Link>
-                            <Link to="/signup">Sign Up</Link>
                         </>
                     ) : (
                         <>
-                            <div className="flex gap-4 ">
+                            <div className="flex gap-4 items-center ">
                                 <img
                                     src={user.picture}
                                     className="w-8 h-8 rounded-full"
