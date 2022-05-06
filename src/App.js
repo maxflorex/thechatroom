@@ -7,6 +7,8 @@ import Chat from "./pages/Chat";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { AppContext, socket } from './context/appContext'
+import Contact from "./pages/Contact";
+import Footer from "./components/Footer";
 
 function App() {
 	const [rooms, setRooms] = useState([]);
@@ -28,8 +30,10 @@ function App() {
 						<Route path='/login' element={<Login />} />
 						<Route path='/signup' element={<SignUp />} />
 					</>)}
+					<Route path='/contact' element={<Contact />} />
 					<Route path='/chat' element={<Chat />} />
 				</Routes>
+				<Footer />
 			</BrowserRouter>
 		</AppContext.Provider>
 	);

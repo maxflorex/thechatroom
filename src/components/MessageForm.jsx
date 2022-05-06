@@ -10,7 +10,7 @@ const MessageForm = () => {
         useContext(AppContext);
     const messageEndRef = useRef(null);
 
-    // USEEFFECT
+    // USEEFFECT - SCROLL TO BOTTOM
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
@@ -55,24 +55,31 @@ const MessageForm = () => {
     };
 
     return (
-        <div className="border-2 w-[100vw] p-8 rounded-lg relative">
+        <div className="p-8 rounded-3xl relative pb-40 w-full z-10 backdrop-blur-sm bg-white/30 flex flex-col overflow-auto">
             {user && !privateMemberMsg?._id && (
-                <div className="w-full bg-teal-400 p-4 rounded-lg text-xl mb-8">
+                <h1 className="w-full p-4 rounded-full text-xl mb-8 text-center backdrop-blur-sm bg-indigo-900/60 drop-shadow-md text-white font-thin">
                     You are in the{' '}
-                    <span className="font-bold uppercase">{currentRooms}</span>{' '}
+                    <span className="font-black uppercase text-amber-300">
+                        {currentRooms}
+                    </span>{' '}
                     room
-                </div>
+                </h1>
             )}
             {user && privateMemberMsg?._id && (
-                <div className="w-full bg-teal-400 p-4 rounded-lg text-xl mb-8 flex gap-4">
-                    <h1>
-                        Your conversation wite{' '}
-                        <span className="font-bold uppercase">
-                            {privateMemberMsg.name}
-                        </span>{' '}
-                        room
-                    </h1>
-                    <img src={privateMemberMsg.picture} alt="Private Member"  className='w-16 h-16'/>
+                <div className="w-full p-4 rounded-full text-xl mb-8 text-center backdrop-blur-sm bg-indigo-900/60 drop-shadow-md text-white font-thin flex justify-center">
+                    <div className="flex gap-2 items-center">
+                        <h1>
+                            Your conversation with
+                            <span className="font-bold uppercase pl-2 text-amber-300">
+                                {privateMemberMsg.name}
+                            </span>
+                        </h1>
+                        <img
+                            src={privateMemberMsg.picture}
+                            alt="Member"
+                            className="w-12 h-12 rounded-full object-cover"
+                        />
+                    </div>
                 </div>
             )}
             {!user ? (
@@ -86,7 +93,7 @@ const MessageForm = () => {
                             ({ content, time, from: sender }, index) => (
                                 <div
                                     key={index}
-                                    className="flex flex-col gap-2 items-start"
+                                    className="flex flex-col gap-2 items-start bg-white/60 p-4 rounded-xl w-1/2"
                                 >
                                     <div className="flex gap-2 items-center">
                                         <img
@@ -101,8 +108,8 @@ const MessageForm = () => {
                                         </p>
                                     </div>
 
-                                    <p>{content}</p>
-                                    <p>{time}</p>
+                                    <p className='text-xl py-2'>{content}</p>
+                                    <p className='self-end text-sm'>{time}</p>
                                 </div>
                             )
                         )}
@@ -111,7 +118,7 @@ const MessageForm = () => {
             )}
             <div ref={messageEndRef} />
             <form
-                className="absolute bottom-8"
+                className="static bottom-0 w-full -mb-16 flex items-center gap-4"
                 disabled={!user}
                 onSubmit={handleSubmit}
             >
