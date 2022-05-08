@@ -34,8 +34,16 @@ const appApi = createApi({
                 body: payload,
             }),
         }),
+        // SEND MESSAGE
+        sendMessage: builder.mutation({
+            query: (payload) => ({
+                url: '/contact',
+                method: 'POST',
+                body: payload,
+            }),
+        }),
     }),
 });
 
-export const { useSignupUserMutation, useLoginUserMutation, useLogoutUserMutation } = appApi;
+export const { useSignupUserMutation, useLoginUserMutation, useLogoutUserMutation, useSendMessageMutation } = appApi;
 export default appApi;

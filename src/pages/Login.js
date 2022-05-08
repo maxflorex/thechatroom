@@ -6,6 +6,7 @@ import { AppContext } from '../context/appContext'
 import bg from '../assets/bg6_6.svg'
 import character from '../assets/Marni 2.png'
 import object1 from '../assets/Other 12.webp'
+import { motion } from 'framer-motion';
 
 const Login = () => {
 
@@ -46,8 +47,17 @@ const Login = () => {
 					<h1>Don't have an account? <Link to='/signup' className='text-amber-500 hover:text-amber-300 duration-300'>Signup</Link></h1>
 				</div>
 			</div>
-			<img src={object1} alt="Icon" className='absolute right-0 md:w-1/3 z-30 pb-40 hidden md:block' />
-			<img src={character} alt="Login" className='xl:w-full md:w-2/3 w-40 object-contain max-h-[80vh] absolute right-0 z-0 bottom-4 md:bottom-auto' />
+			<motion.img src={object1} alt="Icon" className='absolute right-0 md:w-1/3 z-30 pb-40 hidden md:block'
+				initial={{ x: '100vw', opacity: 0 }}
+				animate={{ x: 0, opacity: 1 }}
+				exit={{ x: '100vw', opacity: 0 }}
+				transition={{ ease: 'easeOut', delay: 0, duration: 0.7 }}
+			/>
+			<motion.img src={character} alt="Login" className='xl:w-full md:w-2/3 w-40 object-contain max-h-[80vh] absolute right-0 z-0 bottom-4 md:bottom-auto'
+				initial={{ y: '100vh', opacity: 0 }}
+				animate={{ y: 0, opacity: 1 }}
+				transition={{ ease: 'easeOut', delay: 0.7, duration: 0.7 }}
+			/>
 		</div>
 
 	)

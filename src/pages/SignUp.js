@@ -7,7 +7,8 @@ import image1 from '../assets/Ikbal 5.png'
 import image2 from '../assets/Badrun 4.png'
 import profile from '../assets/profile.png'
 import bg from '../assets/bg2_18.svg'
-import image3 from  '../assets/Other 09.webp'
+import image3 from '../assets/Other 09.webp'
+import { motion } from 'framer-motion';
 
 const SignUp = () => {
 
@@ -96,8 +97,17 @@ const SignUp = () => {
 					<h1>Already have an account? <Link to='/login' className='text-amber-100 hover:text-amber-300 duration-300'>Login</Link></h1>
 				</div>
 			</div>
-			<img src={image3} alt="Icon" className='absolute right-0 md:w-1/3 z-30 pb-40 hidden md:block' />
-			<img src={image2} alt="Login" className='xl:w-full md:w-2/3 w-40 object-contain max-h-[80vh] absolute right-0 z-20 bottom-4 md:bottom-auto' />
+			<motion.img src={image3} alt="Icon" className='absolute right-0 md:w-1/3 z-30 pb-40 hidden md:block'
+				initial={{ x: '100vw', opacity: 0 }}
+				animate={{ x: 0, opacity: 1 }}
+				exit={{ x: '100vw', opacity: 0 }}
+				transition={{ ease: 'easeOut', delay: 0 }}
+			/>
+			<motion.img src={image2} alt="Login" className='xl:w-full md:w-2/3 w-40 object-contain max-h-[80vh] absolute right-0 z-20 bottom-4 md:bottom-auto'
+				initial={{ y: '100vh', opacity: 0 }}
+				animate={{ y: 0, opacity: 1 }}
+				transition={{ ease: 'easeOut', delay: 0.7 }}
+			/>
 		</div>
 	)
 }

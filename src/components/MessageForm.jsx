@@ -55,7 +55,7 @@ const MessageForm = () => {
     };
 
     return (
-        <div className="p-8 rounded-3xl relative pb-40 w-full z-10 backdrop-blur-sm bg-white/30 flex flex-col overflow-auto">
+        <div className="p-8 rounded-3xl relative pb-8 md:pb-16  w-full z-10 backdrop-blur-sm bg-white/30 flex flex-col overflow-auto scrollbar">
             {user && !privateMemberMsg?._id && (
                 <h1 className="w-full p-4 rounded-full text-xl mb-8 text-center backdrop-blur-sm bg-indigo-900/60 drop-shadow-md text-white font-thin">
                     You are in the{' '}
@@ -88,12 +88,19 @@ const MessageForm = () => {
                 </h1>
             ) : (
                 messages?.map(({ _id: date, messagesByDate }, index) => (
-                    <div className="flex flex-col gap-4 pb-24" key={index}>
+                    <div
+                        className="flex flex-col gap-4 pb-8 md:pb-24 drop-shadow-sm"
+                        key={index}
+                    >
                         {messagesByDate?.map(
                             ({ content, time, from: sender }, index) => (
                                 <div
                                     key={index}
-                                    className="flex flex-col gap-2 items-start bg-white/60 p-4 rounded-xl w-1/2"
+                                    className={`flex flex-col gap-2 ${
+                                        sender._id == user?._id
+                                            ? 'bg-white/60 items-end'
+                                            : 'bg-amber-200/60 items-start'
+                                    }  p-4 rounded-xl w-full`}
                                 >
                                     <div className="flex gap-2 items-center">
                                         <img
@@ -108,8 +115,8 @@ const MessageForm = () => {
                                         </p>
                                     </div>
 
-                                    <p className='text-xl py-2'>{content}</p>
-                                    <p className='self-end text-sm'>{time}</p>
+                                    <p className="text-xl py-2">{content}</p>
+                                    <p className="self-end text-sm">{time}</p>
                                 </div>
                             )
                         )}
@@ -118,7 +125,7 @@ const MessageForm = () => {
             )}
             <div ref={messageEndRef} />
             <form
-                className="static bottom-0 w-full -mb-16 flex items-center gap-4"
+                className="static bottom-0 w-full flex items-center gap-4"
                 disabled={!user}
                 onSubmit={handleSubmit}
             >

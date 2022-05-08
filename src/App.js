@@ -9,6 +9,7 @@ import { useState } from "react";
 import { AppContext, socket } from './context/appContext'
 import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
+import { ThankYou } from "./pages/ThankYou";
 
 function App() {
 	const [rooms, setRooms] = useState([]);
@@ -32,6 +33,7 @@ function App() {
 					</>)}
 					<Route path='/contact' element={<Contact />} />
 					<Route path='/chat' element={<Chat />} />
+					<Route path='/thankyou' element={<ThankYou />} />
 				</Routes>
 				<Footer />
 			</BrowserRouter>

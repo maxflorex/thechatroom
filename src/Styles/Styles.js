@@ -4,4 +4,4 @@ export const inputtw = 'bg-white p-4 rounded-full w-full md:w-96 focus:bg-slate-
 export const inputtw2 = 'bg-white p-4 rounded-3xl w-full md:w-96 focus:bg-slate-200 outline-none duration-500 active:scale-110 drop-shadow-sm'
 export const linktw = 'hover:text-amber-400 duration-500 cursor-pointer'
 export const linktw2 = 'p-4 text-xl bg-white rounded-full hover:scale-110 font-bold drop-shadow-md'
-export const linkstw = 'text-xl font-bold hover:scale-110 text-white'
+export const linkstw = 'text-sm md:text-xl font-bold hover:scale-110 text-white'

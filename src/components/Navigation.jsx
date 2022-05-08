@@ -42,7 +42,7 @@ const Navigation = () => {
                     <Link to="/">
                         <div className="flex gap-2 items-center">
                             <img src={model1} alt="logo" className="w-24" />
-                            <h1 className="font-bold text-3xl hover:scale-110 md:block hidden">
+                            <h1 className="font-bold text-3xl  hover:scale-110 md:block hidden">
                                 The Chatroom
                             </h1>
                         </div>
@@ -68,12 +68,12 @@ const Navigation = () => {
                                         src={user.picture}
                                         className="w-8 h-8 rounded-full"
                                     />
-                                    <h3 className="font-semibold text-xl">
+                                    <h3 className="font-semibold text-sm md:text-xl">
                                         Hello, {user.name}
                                     </h3>
                                     {user && showLogout && (
                                         <motion.span
-                                            className="absolute text-xl -bottom-24 right-auto left-auto font-bold p-4 bg-amber-200 rounded-full hover:bg-amber-500"
+                                            className="absolute text-xl -bottom-32 right-auto left-auto font-bold p-4 bg-amber-200 rounded-full hover:bg-amber-500"
                                             onClick={handleLogout}
                                             initial={{
                                                 scale: 0,
