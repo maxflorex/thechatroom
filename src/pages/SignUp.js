@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import { HiOutlineCloudUpload } from 'react-icons/hi'
 import { btntw, inputtw } from '../Styles/Styles';
 import { useSignupUserMutation } from '../services/appApi';
-import image1 from '../assets/Ikbal 5.png'
 import image2 from '../assets/Badrun 4.png'
 import profile from '../assets/profile.png'
 import bg from '../assets/bg2_18.svg'

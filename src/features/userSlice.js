@@ -23,6 +23,8 @@ export const userSlice = createSlice({
         builder.addMatcher(appApi.endpoints.signupUser.matchFulfilled, (state, { payload }) => payload)
         // SAVE USER AFTER LOGIN
         builder.addMatcher(appApi.endpoints.loginUser.matchFulfilled, (state, { payload }) => payload)
+        // SEND CONTACT MESSAGE
+        builder.addMatcher(appApi.endpoints.sendMessage.matchFulfilled, (state, { payload }) => payload)
         // LOGOUT - DESTROY USER SESSION
         builder.addMatcher(appApi.endpoints.logoutUser.matchFulfilled, () => null)
     }

@@ -16,12 +16,12 @@ const Contact = () => {
   const handleMessage = (e) => {
     e.preventDefault();
     // LOGIN LOGIC
-    sendMessage({ email, message }).then(({ data }) => {
-      if (data) {
+    sendMessage({ email, message })
+      .then(() => {
         // NAVIGATE TO THE CHAT
         navigate('/thankyou')
       }
-    })
+      )
   }
 
   return (

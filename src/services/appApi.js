@@ -36,10 +36,10 @@ const appApi = createApi({
         }),
         // SEND MESSAGE
         sendMessage: builder.mutation({
-            query: (payload) => ({
+            query: (message) => ({
                 url: '/contact',
                 method: 'POST',
-                body: payload,
+                body: message,
             }),
         }),
     }),

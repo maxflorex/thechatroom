@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { linkstw, linktw, linktw2 } from '../Styles/Styles';
+import { linkstw, linktw2 } from '../Styles/Styles';
 import { useLogoutUserMutation } from '../services/appApi';
 import model1 from '../assets/Other 02.png';
 import { motion } from 'framer-motion';
